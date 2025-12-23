@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import WeatherCard from "./component/WeatherCard/WeatherCard"
 import SearchBar from './component/SearchBar/SearchBar'
-import { CurrentWeatherResponse } from './classes/CurrentWeatherResponse'
 import { CoordinatesRequest } from "./classes/CoordinatesRequest"
 import { getCoordinatesByLocation } from './utility/WeatherApi'
+import { apiKey } from './environment/ApiKey'
+import { CurrentWeatherResponse } from './classes/CurrentWeatherResponse'
 
 function App() {
   const [location, setLocation] = useState("")
@@ -20,13 +21,17 @@ function App() {
   }
 
   useEffect(() => {
-    const apiKey = import.meta.env.VITE_OWM_API_KEY
+    if(location == "")
+      return
+
     const request = new CoordinatesRequest(location, apiKey)
 
-    let responseCoordinates = null
-    getCoordinatesByLocation(request).then((data) => responseCoordinates = data)
+    const fetchData = async () => {
+      getCoordinatesByLocation(request).then((data) => console.log(data[0]))
+      
+    }
 
-    console.log(responseCoordinates)
+    fetchData()
   }, [location])
 
   return (
