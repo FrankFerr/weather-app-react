@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import WeatherCard from "./component/WeatherCard/WeatherCard"
 import SearchBar from './component/SearchBar/SearchBar'
-import { CoordinatesRequest } from "./classes/CoordinatesRequest"
-import { getCoordinatesByLocation } from './utility/WeatherApi'
-import { apiKey } from './environment/ApiKey'
+import { getCurrentWeatherByLocation } from './utility/WeatherApi'
+import { apiKeyWeatherApi } from './environment/ApiKey'
+import { plainToInstance } from 'class-transformer'
 import { CurrentWeatherResponse } from './classes/CurrentWeatherResponse'
+import { CurrentWeatherRequest } from './classes/CurrentWeatherRequest'
 
 function App() {
   const [location, setLocation] = useState("")
@@ -24,11 +25,17 @@ function App() {
     if(location == "")
       return
 
-    const request = new CoordinatesRequest(location, apiKey)
+    const request = new CurrentWeatherRequest(apiKeyWeatherApi)
+    request.city = location
 
+    let response: CurrentWeatherResponse
+    
     const fetchData = async () => {
-      getCoordinatesByLocation(request).then((data) => console.log(data[0]))
-      
+      getCurrentWeatherByLocation(request).then((data) => {
+        response = plainToInstance(CurrentWeatherResponse, data)
+        
+        setWeatherData(response)
+      })
     }
 
     fetchData()

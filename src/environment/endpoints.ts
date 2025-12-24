@@ -1,4 +1,4 @@
 export const Endpoints = {
-    CurrentWeather: "https://api.openweathermap.org/data/3.0/onecall",
+    CurrentWeather: "http://api.weatherapi.com/v1/current.json",
     CoordinatesByLocation: "http://api.openweathermap.org/geo/1.0/direct"
 }

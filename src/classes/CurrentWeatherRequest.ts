@@ -1,14 +1,11 @@
 export class CurrentWeatherRequest{
-    latitude: string
-    longitude: string
-    appId: string
-    exclude: string = 'minutely, hourly, daily, alerts'
-    units: string = 'standard'
+    latitude: number
+    longitude: number
+    city: string
+    apiKey: string
     language: string = 'it'
 
-    public constructor(latitude: string, longitude: string, appId: string){
-        this.latitude = latitude
-        this.longitude = longitude
-        this.appId = appId
+    public constructor(apiKey: string){
+        this.apiKey = apiKey
     }
 }
