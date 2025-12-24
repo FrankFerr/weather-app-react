@@ -2,14 +2,18 @@ import { WeatherTemp } from "../WeatherTemp/WeatherTemp"
 import type { WeatherCardProps } from "./WeatherCardProps"
 import { WeatherWind } from "../WeatherWind/WeatherWind"
 import { WeatherPressure } from "../WeatherPressure/WeatherPressure"
+import { WeatherHeader } from "../WeatherHeader/WeatherHeader"
 
 export function WeatherCard({ weatherData } : WeatherCardProps){
     return (
         <div className="w-96 rounded-lg border-4 border-black bg-[rgb(220,220,220)]">
-            <h1 className="text-center text-black text-2xl font-bold">{weatherData.location.name} ({weatherData.location.region})</h1>
-            <h3 className="text-center text-black text-xl">{weatherData.location.country}</h3>
-            <img className="w-36 h-36 mx-auto" src={weatherData.current.condition.icon} alt="Immagine meteo"></img>
-            <p className="text-center text-black text-lg">{weatherData.current.condition.text}</p>
+            <WeatherHeader
+                name={weatherData.location.name}
+                region={weatherData.location.region}
+                country={weatherData.location.country}
+                icon={weatherData.current.condition.icon}
+                text={weatherData.current.condition.text}
+            ></WeatherHeader>
 
             <WeatherTemp
                 temp={weatherData.current.temp_c}
