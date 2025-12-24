@@ -11,6 +11,7 @@ import { CurrentWeatherRequest } from './classes/CurrentWeatherRequest'
 function App() {
   const [location, setLocation] = useState("")
   const [weatherData, setWeatherData] = useState(new CurrentWeatherResponse())
+  const [isWeatherDataVisible, setVisibleWeatherData] = useState(false)
 
   const onSearchLocation = (location: string) => {
     location = location.trim()
@@ -35,6 +36,7 @@ function App() {
         response = plainToInstance(CurrentWeatherResponse, data)
         
         setWeatherData(response)
+        setVisibleWeatherData(true)
       })
     }
 
@@ -45,7 +47,7 @@ function App() {
     <>
       <div className='w-screen h-screen bg-[rgba(24,24,24,0.3)] flex justify-center items-center'>
         <SearchBar onClick={onSearchLocation}></SearchBar>
-        <WeatherCard city={location} weatherData={weatherData}></WeatherCard>
+        { isWeatherDataVisible ? <WeatherCard weatherData={weatherData}></WeatherCard> : ""}
       </div>
     </>
   )
