@@ -1,5 +1,6 @@
 import { WeatherTemp } from "../WeatherTemp/WeatherTemp"
 import type { WeatherCardProps } from "./WeatherCardProps"
+import { WeatherWind } from "../WeatherWind/WeatherWind"
 
 export function WeatherCard({ weatherData } : WeatherCardProps){
     return (
@@ -17,15 +18,12 @@ export function WeatherCard({ weatherData } : WeatherCardProps){
                 dewpoint={weatherData.current.dewpoint_c}
             ></WeatherTemp>
 
-            <div className="w-full mt-2">
-                <h1 className="text-left text-black text-xl font-bold ml-2">Vento</h1>
-                <ul className="list-disc ml-12 mt-2">
-                    <li className="text-black text-lg">Velocità {weatherData.current.wind_kph}km/h</li>
-                    <li className="text-black text-lg">Direzione in gradi {weatherData.current.wind_degree}°</li>
-                    <li className="text-black text-lg">Direzione cardinale {weatherData.current.wind_dir}</li>
-                    <li className="text-black text-lg">Velocità raffiche {weatherData.current.gust_kph}km/h</li>
-                </ul>
-            </div>
+            <WeatherWind
+                wind_kph={weatherData.current.wind_kph}
+                wind_degree={weatherData.current.wind_degree}
+                wind_dir={weatherData.current.wind_dir}
+                gust_kph={weatherData.current.gust_kph}
+            ></WeatherWind>
 
             <div className="w-full mt-2">
                 <h1 className="text-left text-black text-xl font-bold ml-2">Pressione e precipitazioni</h1>
