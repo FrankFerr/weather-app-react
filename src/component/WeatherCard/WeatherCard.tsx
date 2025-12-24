@@ -1,6 +1,7 @@
 import { WeatherTemp } from "../WeatherTemp/WeatherTemp"
 import type { WeatherCardProps } from "./WeatherCardProps"
 import { WeatherWind } from "../WeatherWind/WeatherWind"
+import { WeatherPressure } from "../WeatherPressure/WeatherPressure"
 
 export function WeatherCard({ weatherData } : WeatherCardProps){
     return (
@@ -25,15 +26,12 @@ export function WeatherCard({ weatherData } : WeatherCardProps){
                 gust_kph={weatherData.current.gust_kph}
             ></WeatherWind>
 
-            <div className="w-full mt-2">
-                <h1 className="text-left text-black text-xl font-bold ml-2">Pressione e precipitazioni</h1>
-                <ul className="list-disc ml-12 mt-2">
-                    <li className="text-black text-lg">Pressione atmosferica {weatherData.current.pressure_mb}mbar</li>
-                    <li className="text-black text-lg">Precipitazioni {weatherData.current.precip_mm}mm</li>
-                    <li className="text-black text-lg">Umidità {weatherData.current.humidity}%</li>
-                    <li className="text-black text-lg">Nuvolosità {weatherData.current.cloud}%</li>
-                </ul>
-            </div>
+            <WeatherPressure
+                pressure_mb={weatherData.current.pressure_mb}
+                precip_mm={weatherData.current.precip_mm}
+                humidity={weatherData.current.humidity}
+                cloud={weatherData.current.cloud}
+            ></WeatherPressure>
         </div>
     )
 }
